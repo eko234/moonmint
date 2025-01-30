@@ -20,7 +20,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 -- @module moonmint.static
 
 local uv = require 'luv'
-local mime = require('mimetypes').guess
+local mime = require('moonmint.deps.mimetypes').guess
 local newHeaders = require 'moonmint.deps.http-headers'.newHeaders
 local response = require 'moonmint.response'
 local pathJoin = require('moonmint.deps.pathjoin').pathJoin

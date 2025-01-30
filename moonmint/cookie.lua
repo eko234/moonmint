@@ -19,7 +19,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 local byte = string.byte
 local sub = string.sub
 local tonumber = tonumber
-local concat = table.concat
 local assert = assert
 local insert = table.insert
 local type = type
@@ -76,7 +75,7 @@ local function readKVPair(str, i)
     local key = sub(str, kStart, kEnd)
     if charCheck == 61 then -- = sign
         local vStart = skipWhitespace(str, i + 1)
-        i, charCheck = getNext(str, vStart)
+        i = getNext(str, vStart)
         local vEnd = skipWhitespaceBack(str, i - 1)
         local value = sub(str, vStart, vEnd)
         return i + 1, key, value
@@ -101,17 +100,17 @@ local function parseCookie(str)
     return ret
 end
 
-local function makeSetCookie(options)
-    assert(options.value, 'Expected cookie value.')
-    local str = (options.key and (options.key .. '=') or '') .. options.value
-        .. (options.expires and '; Expires=' .. options.expires or '')
-        .. (options.maxAge and '; Max-Age=' .. options.max_age or '')
-        .. (options.domain and '; Domain=' .. options.domain or '')
-        .. (options.path and '; Path=' .. options.path or '')
-        .. (options.secure and '; Secure' or '')
-        .. (options.httpOnly and '; HttpOnly' or '')
-        .. (options.sameSite and '; SameSite=' .. options.sameSite or '')
-        .. (options.extension and '; ' .. options.extension or '')
+local function makeSetCookie(cookie)
+    assert(cookie.value, 'Expected cookie value.')
+    local str = (cookie.key and (cookie.key .. '=') or '') .. cookie.value
+        .. (cookie.expires and '; Expires=' .. cookie.expires or '')
+        .. (cookie.maxAge and '; Max-Age=' .. cookie.max_age or '')
+        .. (cookie.domain and '; Domain=' .. cookie.domain or '')
+        .. (cookie.path and '; Path=' .. cookie.path or '')
+        .. (cookie.secure and '; Secure' or '')
+        .. (cookie.httpOnly and '; HttpOnly' or '')
+        .. (cookie.sameSite and '; SameSite=' .. cookie.sameSite or '')
+        .. (cookie.extension and '; ' .. cookie.extension or '')
     return str
 end
 

@@ -67,6 +67,9 @@ moonmint depends on the luv library, a Lua binding to libuv.
 Another important dependency is lua-openssl, which is a very useful openssl binding for Lua created and maintained
 by [George Zhao](https://github.com/zhaozg). Many thanks.
 
+Bundled the mimetypes dependency under `moonmint/deps/mimetypes.lua` since
+the original repository has disappeared.
+
 ## License
 
 MIT

@@ -114,7 +114,7 @@ local function getConnection(host, port, tls)
             end
         end
     end
-    local read, write, socket, close = assert(connect {
+    local read, write, socket = assert(connect {
         host = host,
         port = port,
         tls = tls

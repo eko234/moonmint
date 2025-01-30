@@ -157,6 +157,14 @@ local function addOnStart(fn, a, b)
     end
 end
 
+local function defaultOnErr(msg)
+    if debug then
+        print(debug.traceback(msg))
+    else
+        print(msg)
+    end
+end
+
 function Server:startLater(options)
     if not options then
         options = {}
@@ -188,7 +196,7 @@ function Server:startLater(options)
         if onErr == nil then
             onErr = options.errHand
             if onErr == nil then
-                onErr = debug and debug.traceback or print
+                onErr = defaultOnErr
             end
         end
         table.insert(self.netServers, server)
